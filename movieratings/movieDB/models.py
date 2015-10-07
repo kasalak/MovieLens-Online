@@ -1,11 +1,9 @@
 from django.db import models
 
 # Create your models here.
-class Rater(model.Model):
-
-
+class Rater(models.Model):
+    pass
 class Movie(models.Model):
-
+    pass
 class Rating(models.Model):
-    rating = models.NumericField
-    
+    pass
