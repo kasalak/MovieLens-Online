@@ -3,12 +3,12 @@ from .models import Rater, Movie, Rating
 
 
 class RaterAdmin(admin.ModelAdmin):
-    list_display = []
+    list_display = ['id', 'gender']
     pass
 
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = []
+    list_display = ['title']
     pass
 
 
