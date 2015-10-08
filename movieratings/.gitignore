@@ -1,3 +1,8 @@
 cat .gitignore
 *.sqlite3
 ml-1m/
+../.direnv/
+../.envrc
+movieDB/__pycache__/
+movieDB/migrations/__pycache__/
+movieratings/__pycache__/
