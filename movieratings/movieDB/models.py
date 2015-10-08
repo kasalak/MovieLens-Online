@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 # id is automatic
 
+
 class Rater(models.Model):
 
     MALE = 'M'
@@ -12,9 +13,7 @@ class Rater(models.Model):
 
     GENDER_CHOICES = (
         (MALE, 'Male'),
-        (FEMALE, 'Female'),
-        (OTHER, 'Other'),
-        (X, 'Did not answer')
+        (FEMALE, 'Female')
     )
 
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
@@ -44,43 +43,48 @@ class Rating(models.Model):
     def __str__(self):              # __unicode__ on Python 2
         return '@rater {} gives {} a {}'.format(self.rater, self.movie, self.stars)
 
-    def load_ml_data():
-        import csv
-        import json
 
-        with open('ml1m/raters.dat') as f:
-            reader = csv.Dictreader(f, fieldnames='raterID, Gender,Age, Occupation, Zipcode',
-                                    delimiter='::')
+def load_ml_data():
+    import csv
+    import json
 
-            for row in reader:
-                raters = []
-                rater = {
-                    'fields': {'gender': row['gender'],
-                               'age': row['Age'],
-                               'occupation': row['Occupation'],
-                               'zipcode': row['Zipcode']
-                    },
-                    'model': 'movieDB.Rater',
-                    'pk': int(row['raterID'])
-                }
-                raters.append(rater)
+    raters = []
 
-            with open('raters.json', 'w') as f:
-                f.write(json.dumps(raters))
+    with open('ml-1m/users.dat') as f:
 
-            print(json.dumps(raters))
+        reader = csv.DictReader([line.replace('::', '\t') for line in f],
+                                fieldnames='RaterID::Gender::Age::Occupation::Zipcode'.split(
+                                    '::'),
+                                delimiter='\t')
+
+        for row in reader:
+            rater = {
+                'fields': {'gender': row['Gender'],
+                           'age': row['Age'],
+                           'occupation': row['Occupation'],
+                           'zipcode': row['Zipcode']
+                           },
+                'model': 'movieDB.Rater',
+                'pk': int(row['RaterID'])
+            }
+
+            raters.append(rater)
+
+    with open('raters.json', 'w') as f:
+        f.write(json.dumps(raters))
+
+
 def load_ml_movies():
     import csv
     import json
 
     movies = []
 
-    with open('ml1m/movies.dat', encoding='Windows1252') as f:
+    with open('ml-1m/movies.dat', encoding='Windows-1252') as f:
         reader = csv.DictReader([line.replace('::', '\t') for line in f],
                                 fieldnames='MovieID::Title::Genres'.split(
                                     '::'),
                                 delimiter='\t')
-
 
         for row in reader:
             movie = {
@@ -93,7 +97,7 @@ def load_ml_movies():
 
             movies.append(movie)
 
-    with open('movies.json' 'w') as f:
+    with open('movies.json', 'w') as f:
         f.write(json.dumps(movies))
 
 
@@ -103,21 +107,28 @@ def load_ml_ratings():
 
     ratings = []
 
-    with open('ml1m/ratings.dat') as f:
+    with open('ml-1m/ratings.dat') as f:
         reader = csv.DictReader([line.replace('::', '\t') for line in f],
-                                fieldnames='UserID::MovieID::Rating::Timestamp'.split('::'),
+                                fieldnames=
+                                'RaterID::MovieID::Stars::Timestamp'.split('::'),
                                 delimiter='\t')
+
         for row in reader:
             rating = {
                 'fields': {
-                    'rating': row['Rating'],
-                    'movie_id': row['MovieID'],
-                    'rater_id': row['UserID'],
-                },
-                'model': 'movieDB.Ratings',
+                    'stars': row['Stars'],
+                    'movie': row['MovieID'],
+                    'rater': row['RaterID'],
+                          },
+                'model': 'movieDB.Rating'
             }
-
             ratings.append(rating)
 
-        with open('ratings.json', 'w') as f:
+    with open('ratings.json', 'w') as f:
             f.write(json.dumps(ratings))
+
+
+def load_all_data():
+    load_ml_data()
+    load_ml_movies()
+    load_ml_ratings()
