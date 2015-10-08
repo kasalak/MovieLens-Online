@@ -3,7 +3,7 @@ from .models import Rater, Movie, Rating
 
 
 class RaterAdmin(admin.ModelAdmin):
-    list_display = ['id', 'gender']
+    list_display = ['id', 'gender', 'age', 'occupation', 'zipcode']
     pass
 
 
@@ -13,7 +13,7 @@ class MovieAdmin(admin.ModelAdmin):
 
 
 class RatingAdmin(admin.ModelAdmin):
-    list_display = []
+    list_display = ['movie', 'stars', 'rater']
     pass
 # Register your models here.
 admin.site.register(Rater, RaterAdmin)
