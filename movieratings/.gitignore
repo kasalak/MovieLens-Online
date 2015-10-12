@@ -3,7 +3,7 @@ cat .gitignore
 ml-1m/
 .direnv/
 .envrc
-movieDB/__pycache__/
-movieDB/migrations/__pycache__/
+thumbsup/__pycache__/
+thumbsup/migrations/__pycache__/
 movieratings/__pycache__/
 *.json
