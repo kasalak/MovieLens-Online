@@ -7,7 +7,7 @@ class Rater(models.Model):
     female = 'f'
     gender_choices = [(male, 'Male'), (female, 'Female')]
     gender = models.CharField(max_length=1, choices=gender_choices)
-    zip_code = models.CharField(max_length=5)
+    zipcode = models.CharField(max_length=5)
     age = models.PositiveSmallIntegerField()
     occupation = models.CharField(max_length=100)
 
@@ -60,7 +60,7 @@ def load_all_ml_data():
 
             raters.append(rater)
 
-    with open('rater.json', 'w') as f:
+    with open('raters.json', 'w') as f:
         f.write(json.dumps(raters))
 
         movies = []
@@ -75,7 +75,7 @@ def load_all_ml_data():
                 'fields': {
                     'title': row['Title']
                 },
-                'model': 'get_ratings.Movie',
+                'model': 'thumbsup.Movie',
                 'pk': row['MovieID']
             }
 
@@ -98,7 +98,7 @@ def load_all_ml_data():
                     'rater': row['RaterID'],
                     'movie': row['MovieID']
                 },
-                'model': 'get_ratings.Rating',
+                'model': 'thumbsup.Rating',
             }
 
             ratings.append(rating)
