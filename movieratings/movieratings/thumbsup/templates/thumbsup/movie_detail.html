@@ -1,2 +1,11 @@
 
   <h2>{{ movie.title }}</h2>
+
+  <h4>Average rating: {{ movie.average_rating|floatformat }} &#9733;</h4>
+
+  <ul>
+  {% for rating in movie.rating_set.all %}
+    <li>{{ rating.stars }}</li>
+  {% endfor %}
+</ul>
+    <li>
