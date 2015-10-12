@@ -3,8 +3,8 @@ from django.db import models
 
 # Create your models here.
 class Rater(models.Model):
-    male = 'm'
-    female = 'f'
+    male = 'M'
+    female = 'F'
     gender_choices = [(male, 'Male'), (female, 'Female')]
     gender = models.CharField(max_length=1, choices=gender_choices)
     zipcode = models.CharField(max_length=5)
@@ -12,7 +12,7 @@ class Rater(models.Model):
     occupation = models.CharField(max_length=100)
 
     def __str__(self):
-        return "rater ID {}".format()
+        return "rater ID {}".format(self.id)
 
 
 class Movie(models.Model):
