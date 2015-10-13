@@ -1,9 +1,4 @@
-cat .gitignore
-*.sqlite3
-ml-1m/
-.direnv/
-.envrc
+movieratings/__pycache__/
 thumbsup/__pycache__/
 thumbsup/migrations/__pycache__/
-movieratings/__pycache__/
-*.json
+../.direnv/ ../.envrc ../.gitignore .direnv/ .envrc
