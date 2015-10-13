@@ -26,11 +26,6 @@ def rater_detail(request, rater_id):
 
 
 def top_movies(request):
-    # movie_list = []
-    # for movie in Movie.objects.all():
-    #     if type(movie.average_rating()) == float:
-    #         movie_list.append(movie)
-
     popular_movies = Movie.objects.annotate(num_ratings=Count('rating')) \
                                   .filter(num_ratings__gte=50)
 

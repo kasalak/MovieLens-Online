@@ -1,0 +1,7 @@
+<h2>Top Movies</h2>
+
+<ul>
+{% for movie in movies %}
+  <li><a href="{% url 'movie_detail' movie.pk %}">{{ movie.title }}</a> - {{ movie.rating__stars__avg|floatformat }}</li>
+{% endfor %}
+</ul>
