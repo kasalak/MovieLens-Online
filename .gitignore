@@ -1,0 +1,8 @@
+cat .gitignore
+*.sqlite3
+ml-1m/
+
+thumbsup/__pycache__/
+thumbsup/migrations/__pycache__/
+movieratings/__pycache__/
+*.json
