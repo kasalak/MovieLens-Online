@@ -1,4 +1,7 @@
+../.envrc
+../.direnv/
+.envrc
+../.direnv/
 movieratings/__pycache__/
 thumbsup/__pycache__/
 thumbsup/migrations/__pycache__/
-../.direnv/ ../.envrc ../.gitignore .direnv/ .envrc
