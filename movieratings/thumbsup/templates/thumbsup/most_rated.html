@@ -1,0 +1,7 @@
+<h2>Most Rated Movies</h2>
+
+<ul>
+{% for movie in movies %}
+  <li><a href="{% url 'movie_detail' movie.pk %}">{{ movie.title }}</a> - {{num.ratings }}</li>
+{% endfor %}
+</ul>

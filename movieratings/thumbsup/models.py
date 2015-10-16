@@ -6,6 +6,7 @@ class Rater(models.Model):
     male = 'M'
     female = 'F'
     gender_choices = [(male, 'Male'), (female, 'Female')]
+    
     gender = models.CharField(max_length=1, choices=gender_choices)
     zipcode = models.CharField(max_length=5)
     age = models.PositiveSmallIntegerField()

@@ -4,6 +4,7 @@
   <h2>Login</h2>
 
   <form method="POST" action="{% url 'user_login' %}">
+    {% csrf_token %}
     Username: <input type="text" name="username">
     <br>
     Password: <input type="password" name="password">

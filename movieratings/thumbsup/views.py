@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, logout, authenticate
 from django.db.models import Avg, Count
 from .models import Movie, Rater, Rating
 # Create your views here.
@@ -35,3 +36,12 @@ def top_movies(request):
     return render(request,
                   'thumbsup/top_movies.html',
                   {'movies': movies})
+
+def most_ratings(request):
+        popular_movies = Movie.objects.annotate(num_ratings=Count('rating'))
+
+        most_rated = popular_movies.order_by('-num_ratings')[:20]
+
+        return render(request,
+                     'thumbsup/most_rated.html,
+                     {'most_ratings': most_rated})
